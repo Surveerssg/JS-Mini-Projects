@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async-1</title>
+</head>
+<body>
+    <h1>Start should change background colour every second</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    //Generate a random colour
+
+    //We can also write this like let randomColor=function(){}
+    function randomColor(){
+        const hex='0123456789ABCDEF';
+        let color='#';
+        for(let i=0;i<6;i++){
+            color+=hex[Math.floor(Math.random()*16)];
+        }
+        return color;
+    }
+    // console.log(randomColor());
+let interval1;
+    function startChangingColor(){
+        if(!interval1) //NUll hoga tabhi isme value dalega
+       {interval1= setInterval(changeColor,1000); }
+        function changeColor(){
+            document.body.style.backgroundColor=randomColor();
+        }
+    }
+    function stopChangingColor(){
+        clearInterval(interval1); 
+        interval1=null;
+    }
+    document.querySelector('#start').addEventListener('click',startChangingColor);
+    document.querySelector('#stop').addEventListener('click',stopChangingColor);
+    
+</script>
+</html>

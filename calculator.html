@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #0F4C5C;
+            padding:1rem;
+        }
+        .row{
+            display:flex;
+            gap:1rem;
+            justify-content: center;
+            align-items:center;
+
+        }
+        button{
+            border-radius: 1rem;
+            border:2px solid #271205;
+            background-color: #fb8b23;
+            padding:1rem;
+            font-size: 1.5rem;
+            font-weight: 1000;
+            color:black;
+        }
+        h1{
+            color:#ebae88;
+            text-align:center;
+        }
+        .calculator{
+            margin-top:5rem;
+            display:flex;
+            flex-direction:column;
+            gap:1.5rem;
+        }
+        p{
+            height:3rem;
+            width:15rem;
+            background-color: #fb8b23;
+            color:black;
+            font-size: 2rem;
+            font-weight: 1000;
+            line-height:2.75rem;
+            padding:1rem;
+            
+        }
+    </style>
+</head>
+<body>
+   <h1> Simple Calculator</h1>
+   <div class="calculator">
+    <div class="row">
+        <p id="textBox"></p>
+    </div>
+    <div class="row">
+    <div class="choice"><button>7</button></div>
+    <div class="choice"><button>8</button></div>
+    <div class="choice"><button>9</button></div>
+    <div class="choice"><button>*</button></div>
+    </div>
+
+    <div class="row">
+    <div class="choice"><button>4</button></div>
+    <div class="choice"><button>5</button></div>
+    <div class="choice"><button>6</button></div>
+    <div class="choice"><button>-</button></div>
+    </div>
+
+    <div class="row">
+    <div class="choice"><button>1</button></div>
+    <div class="choice"><button>2</button></div>
+    <div class="choice"><button>3</button></div>
+    <div class="choice"><button>+</button></div>
+    </div>
+
+    <div class="row"> 
+    <div class="choice"><button>0</button></div>
+    <div class="choice"><button>.</button></div>
+    <div class="choice"><button>C</button></div>
+    <div class="choice"><button>=</button></div>
+    </div>
+</div>
+   
+</body>
+<script>
+    let choices=document.querySelectorAll('.choice');
+    let text=document.getElementById('textBox');
+    let s="";
+    choices.forEach((choice)=>choice.addEventListener('click',(e)=>{
+    //    console.log(e.target.innerText);
+      let clickedSymbol=e.target.innerText;
+      if(clickedSymbol==='='){
+        s=eval(text.innerHTML);
+        text.innerHTML=s;
+      }
+      else if(clickedSymbol==='C'){
+        s=''
+        text.innerHTML=s;
+      }
+      else{
+      s+=clickedSymbol;
+      text.innerHTML=s;
+      }
+      
+    }))
+</script>
+</html>
