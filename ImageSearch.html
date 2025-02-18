@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search App</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ab9aff, #91e26f);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            border: 2px solid #ff758c;
+            border-radius: 5px;
+            outline: none;
+        }
+        button {
+            padding: 10px 15px;
+            background: #ff758c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff4b69;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        .image-grid img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Image Search App</h2>
+        <input type="text" id="searchInput" placeholder="Search for images...">
+        <button onclick="searchImages()">Search</button>
+        <div class="image-grid" id="imageGrid"></div>
+    </div>
+    
+    <script>
+        async function searchImages() {
+            let query = document.getElementById("searchInput").value.trim();
+            if (query === "") return;
+            
+            let accessKey = "gvMFPurv92IUblvsra1R6vOm8lWdPgreq8OyZLI_Cfg";
+            let url = `https://api.unsplash.com/search/photos?query=${query}&client_id=${accessKey}&per_page=9`;
+            
+            let response = await fetch(url);
+            let data = await response.json();
+            
+            let imageGrid = document.getElementById("imageGrid");
+            imageGrid.innerHTML = "";
+            
+            data.results.forEach(photo => {
+                let imgElement = document.createElement("img");
+                imgElement.src = photo.urls.small;
+                imageGrid.appendChild(imgElement);
+            });
+        }
+    </script>
+</body>
+</html>
